@@ -59,8 +59,14 @@ keeps <- c(
 )
 
 fldatawrapper <- fl[,keeps, with=F]
-fldatawrapper[is.na(fldatawrapper)] <- 0
+fldatawrapper[is.na(fldatawrapper)] <- ''
 fldatawrapper$total_hospitalized <- as.numeric(fldatawrapper$total_adult_patients_hospitalized_confirmed_covid) + as.numeric(fldatawrapper$total_pediatric_patients_hospitalized_confirmed_covid)
+
+fldatawrapper <- filter(
+  .data = fldatawrapper,
+  !is.na(total_hospitalized)
+)
+
 
 write.csv(
   x = fldatawrapper,
