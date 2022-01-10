@@ -89,18 +89,26 @@ updateDateFormat <- gsub(
   )
 )
 
+adultchild <- '8TT1o'
 chartIDs <- c(
-  'j6nGT',
-  'DjOnk'
+  'j6nGT', # hospitalizations and adult icu
+  'DjOnk', # percent of hospitalizations children
+  adultchild # adult and pediatric hospitalizations
 )
 
 apikey <- Sys.getenv("DATAWRAPPER_API")
 
 for (id in chartIDs) {
+  annotation <- ifelse(
+    test = id == adultchild,
+    yes = paste0("Updated ",updateDateFormat,'. Logarithmic scale is used to clearly display trends for both adult and pediatric patients.'),
+    no = paste0("Updated ",updateDateFormat,'.')
+  )
+  
   dw_edit_chart(
     chart_id = id,
     api_key = apikey,
-    annotate = paste0("Updated ",updateDateFormat,'.')
+    annotate = 
   )
   print("Publishing chart")  
   dw_publish_chart(
