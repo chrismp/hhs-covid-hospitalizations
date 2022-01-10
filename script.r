@@ -61,6 +61,8 @@ keeps <- c(
 fldatawrapper <- fl[,keeps, with=F]
 fldatawrapper[is.na(fldatawrapper)] <- ''
 fldatawrapper$total_hospitalized <- as.numeric(fldatawrapper$total_adult_patients_hospitalized_confirmed_covid) + as.numeric(fldatawrapper$total_pediatric_patients_hospitalized_confirmed_covid)
+fldatawrapper$percent_pediatric <- as.numeric(fldatawrapper$total_pediatric_patients_hospitalized_confirmed_covid) / as.numeric(fldatawrapper$total_hospitalized) * 100
+
 
 fldatawrapper <- filter(
   .data = fldatawrapper,
