@@ -90,7 +90,8 @@ updateDateFormat <- gsub(
 )
 
 chartIDs <- c(
-  'j6nGT'
+  'j6nGT',
+  'DjOnk'
 )
 
 apikey <- Sys.getenv("DATAWRAPPER_API")
