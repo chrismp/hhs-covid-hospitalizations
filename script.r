@@ -108,7 +108,7 @@ for (id in chartIDs) {
   dw_edit_chart(
     chart_id = id,
     api_key = apikey,
-    annotate = 
+    annotate = annotation
   )
   print("Publishing chart")  
   dw_publish_chart(
