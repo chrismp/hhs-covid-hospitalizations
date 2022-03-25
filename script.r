@@ -26,6 +26,8 @@ rb <- rbindlist(
 )
 
 rb$date_formatted <- as.Date(rb$date)
+rb$total_hospitalized <- as.numeric(rb$total_adult_patients_hospitalized_confirmed_covid) + as.numeric(rb$total_pediatric_patients_hospitalized_confirmed_covid)
+rb$percent_pediatric <- as.numeric(rb$total_pediatric_patients_hospitalized_confirmed_covid) / as.numeric(rb$total_hospitalized) * 100
 
 
 o <- 'output'
@@ -55,13 +57,15 @@ keeps <- c(
   'date_formatted',
   'total_adult_patients_hospitalized_confirmed_covid',
   'total_pediatric_patients_hospitalized_confirmed_covid',
-  'staffed_icu_adult_patients_confirmed_covid'
+  'staffed_icu_adult_patients_confirmed_covid',
+  'total_hospitalized',
+  'percent_pediatric'
 )
 
 fldatawrapper <- fl[,keeps, with=F]
 fldatawrapper[is.na(fldatawrapper)] <- ''
-fldatawrapper$total_hospitalized <- as.numeric(fldatawrapper$total_adult_patients_hospitalized_confirmed_covid) + as.numeric(fldatawrapper$total_pediatric_patients_hospitalized_confirmed_covid)
-fldatawrapper$percent_pediatric <- as.numeric(fldatawrapper$total_pediatric_patients_hospitalized_confirmed_covid) / as.numeric(fldatawrapper$total_hospitalized) * 100
+# fldatawrapper$total_hospitalized <- as.numeric(fldatawrapper$total_adult_patients_hospitalized_confirmed_covid) + as.numeric(fldatawrapper$total_pediatric_patients_hospitalized_confirmed_covid)
+# fldatawrapper$percent_pediatric <- as.numeric(fldatawrapper$total_pediatric_patients_hospitalized_confirmed_covid) / as.numeric(fldatawrapper$total_hospitalized) * 100
 
 
 fldatawrapper <- filter(
@@ -89,10 +93,10 @@ updateDateFormat <- gsub(
   )
 )
 
-adultchild <- '8TT1o'
+adultchild <- 'e7rPB'
 chartIDs <- c(
-  'j6nGT', # hospitalizations and adult icu
-  'DjOnk', # percent of hospitalizations children
+  '1HRMS', # hospitalizations and adult icu
+  'j93Ie', # percent of hospitalizations children
   adultchild # adult and pediatric hospitalizations
 )
 
